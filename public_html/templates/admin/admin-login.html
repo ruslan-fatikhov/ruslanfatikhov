@@ -1,0 +1,49 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<section class="admin-auth">
+  <div class="admin-auth__card">
+    <h1>Вход в админку</h1>
+    {% if awaiting_2fa %}
+      <p class="admin-auth__hint">Введите 6-значный код из Authenticator.</p>
+    {% else %}
+      <p class="admin-auth__hint">Введите пароль администратора.</p>
+    {% endif %}
+
+    {% if error %}
+      <p class="admin-auth__error">{{ error }}</p>
+    {% endif %}
+
+    <form method="post" class="admin-auth__form" autocomplete="off">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+    <input type="hidden" name="revision" value="{{ revision }}">
+      <input type="hidden" name="next" value="{{ next_path }}">
+      {% if awaiting_2fa %}
+        <input type="hidden" name="stage" value="totp">
+
+        <label for="totp_code">Код подтверждения</label>
+        <input
+          id="totp_code"
+          name="totp_code"
+          type="text"
+          inputmode="numeric"
+          pattern="[0-9]{6}"
+          maxlength="6"
+          placeholder="123456"
+          autocomplete="one-time-code"
+          required
+        >
+
+        <button type="submit" class="button">Подтвердить</button>
+      {% else %}
+        <input type="hidden" name="stage" value="password">
+
+        <label for="password">Пароль</label>
+        <input id="password" name="password" type="password" autocomplete="current-password" required>
+
+        <button type="submit" class="button">Продолжить</button>
+      {% endif %}
+    </form>
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,121 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<section
+  class="collection_page"
+  data-collection-title="{{ collection.title }}"
+  data-collection-page
+  data-collection-base-url="/collections/{{ collection.id }}"
+  data-initial-item-id="{{ initial_item_id or '' }}"
+>
+  <div class="mt4 mb4">
+    <h2>
+      <a class="border" href="/collections">Collections</a>
+      <span class="border">/</span>
+      {{ collection.title }}
+    </h2>
+  </div>
+
+  {% if collection.cover_path %}
+    <div class="collection-hero mb4">
+      <img src="{{ thumbnail_url(collection.cover_path) }}" alt="{{ collection.title }}" loading="lazy" decoding="async">
+    </div>
+  {% endif %}
+
+  {% if collection['items'] %}
+    <div class="collections__grid">
+      {% for item in collection['items'] %}
+        <a
+          href="/collections/{{ collection.id }}/{{ item.id }}?lang={{ lang }}"
+          class="collection-card"
+          data-collection-item-trigger
+          data-item-id="{{ item.id }}"
+        >
+          {% if item.image_path %}
+            <img
+              class="collection-card__cover"
+              src="{{ thumbnail_url(item.image_path) }}"
+              alt="{{ item.title }}"
+              loading="lazy"
+              decoding="async"
+            >
+          {% else %}
+            <div class="collection-card__placeholder">{{ loop.index }}</div>
+          {% endif %}
+          <div class="collection-card__body">
+            <h3 class="black">{{ item.title }}</h3>
+          </div>
+        </a>
+      {% endfor %}
+    </div>
+  {% else %}
+    <div class="collection-card collection-card--empty">
+      <div class="collection-card__body">
+        <h2>В этой коллекции пока нет объектов</h2>
+      </div>
+    </div>
+  {% endif %}
+
+  <div class="collection-modal" data-collection-modal hidden>
+    <button class="collection-modal__backdrop" type="button" aria-label="Close" data-collection-close></button>
+    <section class="collection-modal__sheet" role="dialog" aria-modal="true" aria-labelledby="collection-modal-title">
+
+      <div class="collection-modal__header">
+        <h2 id="collection-modal-title" data-collection-title></h2>
+        <button class="btn_icon" type="button" aria-label="Close" data-collection-close>
+           <img src="{{ asset_url('img/icon/cross.svg') }}" alt="navigation" loading="eager" fetchpriority="high" decoding="async" />
+        </button>
+      </div>
+
+      <div class="collection-modal__content">
+        <div class="collection-modal__gallery" data-collection-gallery hidden></div>
+
+        <dl class="collection-fields collection-modal__fields" data-collection-fields hidden></dl>
+      </div>
+    </section>
+  </div>
+
+  <div class="gallery-viewer" data-gallery-viewer role="dialog" aria-modal="true" aria-label="Просмотр изображения" hidden>
+    <div class="gallery-viewer__overlay" data-gallery-close></div>
+    <button class="btn_icon" type="button" aria-label="Закрыть изображение" data-gallery-close>
+      <img src="{{ asset_url('img/icon/cross.svg') }}" alt="navigation" loading="eager" fetchpriority="high" decoding="async" />
+    </button>
+    <button class="gallery-viewer__nav" type="button" aria-label="Предыдущее изображение" data-gallery-prev>‹</button>
+    <img class="gallery-viewer__image" data-gallery-image alt="">
+    <button class="gallery-viewer__nav" type="button" aria-label="Следующее изображение" data-gallery-next>›</button>
+    <div class="gallery-viewer__footer">
+      <div class="gallery-viewer__count" data-gallery-count></div>
+    </div>
+  </div>
+
+  <script id="collection-items-data" type="application/json">
+    [
+      {% for item in collection['items'] %}
+        {
+          "id": {{ item.id | tojson }},
+          "title": {{ item.title | tojson }},
+          "image_path": {{ (asset_url(item.image_path) if item.image_path else "") | tojson }},
+          "thumbnails": [{% for image_path in item.gallery %}{{ thumbnail_url(image_path)|tojson }}{% if not loop.last %},{% endif %}{% endfor %}],
+          "gallery": [
+            {% for image_path in item.gallery %}
+              {{ asset_url(image_path) | tojson }}{% if not loop.last %},{% endif %}
+            {% endfor %}
+          ],
+          "fields": [
+            {% for field in item.fields %}
+              {
+                "label": {{ field.label | tojson }},
+                "value": {{ field.value | tojson }}
+              }{% if not loop.last %},{% endif %}
+            {% endfor %}
+          ]
+        }{% if not loop.last %},{% endif %}
+      {% endfor %}
+    ]
+  </script>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+  <script src="{{ asset_url('js/collections.js') }}" defer></script>
+{% endblock %}

@@ -1,0 +1,71 @@
+{% extends "layout.html" %}
+
+{% block extra_css %}
+  <link rel="stylesheet" href="{{ asset_url('css/cities.css') }}">
+{% endblock %}
+
+{% block content %}
+<section class="cities">
+
+  <div class="cities__body">
+    <div class="cities__list" data-cities-list>
+      <h1 class="page-title black text-center" data-i18n="labels.cities">{{ t.labels.cities }}</h1>
+      <div class="cities__cards">
+        {% for group in country_groups %}
+          <section class="cities__country-group">
+            <h2 class="cities__country-title">{{ group.country }}</h2>
+            <div class="cities__country-cards">
+              {% for city in group.cities %}
+                {% include "components/city-card.html" %}
+              {% endfor %}
+            </div>
+          </section>
+        {% endfor %}
+      </div>
+    </div>
+
+    <div class="cities__map" data-cities-map>
+      <h1 class="cities__map-title page-title black text-center" data-i18n="labels.cities">{{ t.labels.cities }}</h1>
+      <div id="map"><div class="cities__map-empty" role="status">Карта загрузится при просмотре.</div></div>
+    </div>
+  </div>
+
+  <div class="cities__tabs" data-cities-tabs role="tablist" aria-label="{{ t.labels.cities }}">
+    <button class="cities__tab" type="button" data-tab="list" role="tab">{{ t.labels.list }}</button>
+    <button class="cities__tab" type="button" data-tab="map" role="tab">{{ t.labels.map }}</button>
+  </div>
+
+  <div class="city-sheet" data-city-sheet role="dialog" aria-modal="true" aria-labelledby="city-sheet-title" hidden>
+    <button class="city-sheet__backdrop" type="button" data-city-sheet-close aria-label="Закрыть"></button>
+    <div class="city-sheet__panel">
+      <div class="city-sheet__header">
+        <div>
+          <h2 class="city-sheet__title" id="city-sheet-title"></h2>
+          <div class="city-sheet__meta" data-city-sheet-country></div>
+        </div>
+        <button class="btn_icon" type="button" data-city-sheet-close aria-label="Закрыть">✕</button>
+      </div>
+      <div class="gallery city-sheet__gallery" data-city-sheet-gallery data-gallery></div>
+    </div>
+  </div>
+</section>
+
+<div class="gallery-viewer" data-gallery-viewer role="dialog" aria-modal="true" aria-label="Просмотр изображения" hidden>
+  <div class="gallery-viewer__overlay" data-gallery-close></div>
+  <button class="gallery-viewer__close" data-gallery-close>✕</button>
+  <button class="gallery-viewer__nav" data-gallery-prev>‹</button>
+  <img class="gallery-viewer__image" data-gallery-image alt="">
+  <button class="gallery-viewer__nav" data-gallery-next>›</button>
+  <div class="gallery-viewer__footer">
+    <div class="gallery-viewer__count" data-gallery-count></div>
+    <a class="button" data-gallery-download download data-i18n="buttons.download">{{ t.buttons.download }}</a>
+  </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+  <script src="{{ asset_url('js/cities.js') }}" defer></script>
+  <script src="{{ asset_url('js/gallery.js') }}" defer></script>
+  <script src="{{ asset_url('js/maplibre-openfreemap.js') }}" defer></script>
+  <script src="{{ asset_url('js/map.js') }}" defer></script>
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<section class="article">
+  <h1 class="mt4">Books</h1>
+
+  {% for year_block in years %}
+    <div class="mb6">
+      <h2 class="book_year">{{ year_block.year }}</h2>
+
+      <div class="book_stack">
+        {% for book in year_block.books %}
+          <article class="book">
+            <img src="{{ asset_url(book.cover_path) }}" alt="{{ book.title }}" loading="lazy" decoding="async">
+            <p class="mb1"><strong>{{ book.title }}</strong></p>
+            <p>{{ book.author }}</p>
+            {% if book.fav %}
+              <img src="{{ asset_url('img/icon/gold-star.svg') }}" alt="Favorite" width="20" height="20" loading="lazy" decoding="async">
+            {% endif %}
+          </article>
+        {% endfor %}
+      </div>
+
+    </div>
+  {% endfor %}
+</section>
+{% endblock %}

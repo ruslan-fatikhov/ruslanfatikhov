@@ -1,0 +1,17 @@
+<article class="card post-card feed__item" data-feed-item>
+  <a href="/{{ post.slug }}" class="card__link" aria-label="{{ post.headline }}">
+    {% if post.image %}
+    <img
+      class="card__media_feed"
+      src="{{ post.card_image }}"
+      alt="{{ post.headline }}"
+      loading="lazy"
+      decoding="async"
+    >
+    {% endif %}
+    <div class="card__body">
+      <h3 class="card__title">{{ post.headline }}</h3>
+      <p class="card__meta">{{ post.subline }}</p>
+    </div>
+  </a>
+</article>

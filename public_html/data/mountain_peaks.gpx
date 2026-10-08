@@ -1,0 +1,106 @@
+<?xml version="1.0"?>
+<gpx version="1.1" creator="Organic Maps" xmlns="http://www.topografix.com/GPX/1/1"
+    xmlns:gpxx="http://www.garmin.com/xmlschemas/GpxExtensions/v3"
+    xmlns:gpx_style="http://www.topografix.com/GPX/gpx_style/0/2"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.topografix.com/GPX/1/1 https://www.topografix.com/GPX/1/1/gpx.xsd http://www.topografix.com/GPX/gpx_style/0/2 https://www.topografix.com/GPX/gpx_style/0/2/gpx_style.xsd http://www.garmin.com/xmlschemas/GpxExtensions/v3 https://www.garmin.com/xmlschemas/GpxExtensionsv3.xsd">
+<metadata>
+  <name>Peaks2</name>
+</metadata>
+<wpt lat="43.081093" lon="76.932693">
+  <name>Аютау</name>
+  <extensions>
+    <xsi:gpx><color>#FFE51B23</color></xsi:gpx>
+  </extensions>
+</wpt>
+<wpt lat="43.111097" lon="76.947257">
+  <name>Көкшоқы</name>
+  <extensions>
+    <xsi:gpx><color>#FFE51B23</color></xsi:gpx>
+  </extensions>
+</wpt>
+<wpt lat="43.11801" lon="76.960802">
+  <name>Смотровая</name>
+  <extensions>
+    <xsi:gpx><color>#FFE51B23</color></xsi:gpx>
+  </extensions>
+</wpt>
+<wpt lat="43.119338" lon="77.031301">
+  <name>Құмбел</name>
+  <extensions>
+    <xsi:gpx><color>#FFE51B23</color></xsi:gpx>
+  </extensions>
+</wpt>
+<wpt lat="43.126871" lon="77.013368">
+  <name>Три брата</name>
+  <extensions>
+    <xsi:gpx><color>#FFE51B23</color></xsi:gpx>
+  </extensions>
+</wpt>
+<wpt lat="43.151892" lon="77.013733">
+  <name>Көктерек</name>
+  <extensions>
+    <xsi:gpx><color>#FFE51B23</color></xsi:gpx>
+  </extensions>
+</wpt>
+<wpt lat="43.173905" lon="76.983231">
+  <name>Динамо</name>
+  <extensions>
+    <xsi:gpx><color>#FFE51B23</color></xsi:gpx>
+  </extensions>
+</wpt>
+<wpt lat="43.149072" lon="77.050168">
+  <name>Мохнатка</name>
+  <extensions>
+    <xsi:gpx><color>#FFE51B23</color></xsi:gpx>
+  </extensions>
+</wpt>
+<wpt lat="43.173608" lon="77.07916">
+  <name>Серкебай</name>
+  <extensions>
+    <xsi:gpx><color>#FFE51B23</color></xsi:gpx>
+  </extensions>
+</wpt>
+<wpt lat="43.171971" lon="77.130578">
+  <name>Мыс Надежды</name>
+  <extensions>
+    <xsi:gpx><color>#FFE51B23</color></xsi:gpx>
+  </extensions>
+</wpt>
+<wpt lat="43.166624" lon="77.134811">
+  <name>Букреев</name>
+  <extensions>
+    <xsi:gpx><color>#FFE51B23</color></xsi:gpx>
+  </extensions>
+</wpt>
+<wpt lat="43.162181" lon="77.135862">
+  <name>Қотырбұлақ</name>
+  <extensions>
+    <xsi:gpx><color>#FFE51B23</color></xsi:gpx>
+  </extensions>
+</wpt>
+<wpt lat="43.145655" lon="77.129197">
+  <name>Sky</name>
+  <extensions>
+    <xsi:gpx><color>#FFE51B23</color></xsi:gpx>
+  </extensions>
+</wpt>
+<wpt lat="43.140328" lon="77.117105">
+  <name>Панорама</name>
+  <extensions>
+    <xsi:gpx><color>#FFE51B23</color></xsi:gpx>
+  </extensions>
+</wpt>
+<wpt lat="43.23287" lon="76.976075">
+  <name>Көк-Төбе</name>
+  <extensions>
+    <xsi:gpx><color>#FFE51B23</color></xsi:gpx>
+  </extensions>
+</wpt>
+<wpt lat="43.171812" lon="77.046359">
+  <name>Қаракүнгей</name>
+  <extensions>
+    <xsi:gpx><color>#FFE51B23</color></xsi:gpx>
+  </extensions>
+</wpt>
+</gpx>

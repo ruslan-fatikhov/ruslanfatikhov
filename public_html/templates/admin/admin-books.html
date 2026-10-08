@@ -1,0 +1,102 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<section class="admin-books">
+  <div class="admin-books__toolbar">
+    <a class="button" href="/admin">Назад</a>
+    <button class="button" type="button" data-add-row>Добавить строку</button>
+  </div>
+
+  {% if error %}
+    <p class="admin-books__alert admin-books__alert--error">{{ error }}</p>
+  {% endif %}
+  {% if saved %}
+    <p class="admin-books__alert admin-books__alert--ok">Сохранено</p>
+  {% endif %}
+
+  <form method="post" data-books-form>
+    <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+    <input type="hidden" name="revision" value="{{ revision }}">
+    <input type="hidden" name="payload" data-books-payload>
+
+    <div class="admin-books__table-wrap">
+      <table class="admin-books__table">
+        <thead>
+          <tr>
+            <th>Год</th>
+            <th>Автор</th>
+            <th>Название</th>
+            <th>Обложка</th>
+            <th>Fav</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody data-books-body></tbody>
+      </table>
+    </div>
+
+    <div class="admin-books__actions">
+      <button class="button" type="submit">Сохранить books.json</button>
+    </div>
+  </form>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+(() => {
+  const initialRows = {{ rows | tojson }};
+  const body = document.querySelector('[data-books-body]');
+  const addRowBtn = document.querySelector('[data-add-row]');
+  const form = document.querySelector('[data-books-form]');
+  const payloadInput = document.querySelector('[data-books-payload]');
+  const esc = (value) =>
+    String(value ?? '')
+      .replaceAll('&', '&amp;')
+      .replaceAll('<', '&lt;')
+      .replaceAll('>', '&gt;')
+      .replaceAll('"', '&quot;');
+
+  function renderRow(row = {}) {
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td><input type="number" data-field="year" value="${esc(row.year)}"></td>
+      <td><input type="text" data-field="author" value="${esc(row.author)}"></td>
+      <td><input type="text" data-field="title" value="${esc(row.title)}"></td>
+      <td><input type="text" data-field="cover" value="${esc(row.cover)}" placeholder="book.jpg"></td>
+      <td class="admin-books__fav"><input type="checkbox" data-field="fav" ${row.fav ? 'checked' : ''}></td>
+      <td><button class="button" type="button" data-remove-row>Удалить</button></td>
+    `;
+
+    tr.querySelector('[data-remove-row]').addEventListener('click', () => {
+      tr.remove();
+    });
+
+    body.appendChild(tr);
+  }
+
+  function collectRows() {
+    return Array.from(body.querySelectorAll('tr')).map((tr) => {
+      const year = tr.querySelector('[data-field="year"]').value;
+      const author = tr.querySelector('[data-field="author"]').value;
+      const title = tr.querySelector('[data-field="title"]').value;
+      const cover = tr.querySelector('[data-field="cover"]').value;
+      const fav = tr.querySelector('[data-field="fav"]').checked;
+      return { year, author, title, cover, fav };
+    });
+  }
+
+  addRowBtn.addEventListener('click', () => renderRow());
+
+  form.addEventListener('submit', () => {
+    payloadInput.value = JSON.stringify(collectRows());
+  });
+
+  if (initialRows.length === 0) {
+    renderRow();
+  } else {
+    initialRows.forEach((row) => renderRow(row));
+  }
+})();
+</script>
+{% endblock %}

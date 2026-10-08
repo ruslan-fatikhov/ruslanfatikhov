@@ -1,0 +1,46 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<section class="admin-books">
+  <div class="admin-books__toolbar">
+    <a class="button" href="/admin">Назад</a>
+    <a class="button" href="/admin/cities/new">Создать город</a>
+  </div>
+
+  {% if message == "created" %}
+    <p class="admin-books__alert admin-books__alert--ok">Город создан.</p>
+  {% elif message == "updated" %}
+    <p class="admin-books__alert admin-books__alert--ok">Город сохранён.</p>
+  {% elif message == "deleted" %}
+    <p class="admin-books__alert admin-books__alert--ok">Город удалён.</p>
+  {% endif %}
+
+  <div class="admin-collections-list">
+    {% for city in cities %}
+      <article class="admin-collection-card">
+        {% if city.thumb %}
+          <img class="admin-collection-card__cover" src="{{ city.thumb }}" alt="{{ city.name }}">
+        {% else %}
+          <div class="admin-collection-card__placeholder">{{ city.slug }}</div>
+        {% endif %}
+        <div class="admin-collection-card__body">
+          <h2>{{ city.name }}</h2>
+          <p>{{ city.country }}</p>
+          <p>{{ city.name_en }} · {{ city.country_en }}</p>
+          <p>{{ city.count }} фото</p>
+          <p>{{ city.location.lat }}, {{ city.location.lng }}</p>
+          <div class="admin-collection-card__actions">
+            <a class="button" href="/cities/{{ city.slug }}">Паблик</a>
+            <a class="button" href="/admin/cities/{{ city.slug }}/edit">Редактировать</a>
+            <form method="post" action="/admin/cities/{{ city.slug }}/delete">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+    <input type="hidden" name="revision" value="{{ revision }}">
+              <button class="button" type="submit">Удалить</button>
+            </form>
+          </div>
+        </div>
+      </article>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}

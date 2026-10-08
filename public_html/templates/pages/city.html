@@ -1,0 +1,36 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<section class="city">
+  <div class="city__header">
+    <h1 class="page-title">{{ city.name }}</h1>
+    <div class="city__meta">{{ city.country }}</div>
+  </div>
+
+  <div class="gallery" data-gallery>
+    <div class="gallery__grid">
+      {% for item in gallery %}
+        <button class="gallery__item" data-full="{{ item.full }}">
+          <img src="{{ item.thumb }}" alt="{{ city.name }} photo {{ loop.index }}" loading="lazy" decoding="async">
+        </button>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<div class="gallery-viewer" data-gallery-viewer role="dialog" aria-modal="true" aria-label="Просмотр изображения" hidden>
+  <div class="gallery-viewer__overlay" data-gallery-close></div>
+  <button class="gallery-viewer__close" data-gallery-close>✕</button>
+  <button class="gallery-viewer__nav" data-gallery-prev>‹</button>
+  <img class="gallery-viewer__image" data-gallery-image alt="">
+  <button class="gallery-viewer__nav" data-gallery-next>›</button>
+  <div class="gallery-viewer__footer">
+    <div class="gallery-viewer__count" data-gallery-count></div>
+    <a class="button" data-gallery-download download data-i18n="buttons.download">{{ t.buttons.download }}</a>
+  </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+  <script src="{{ asset_url('js/gallery.js') }}" defer></script>
+{% endblock %}

@@ -1,0 +1,92 @@
+[
+  {
+    "slug": "ozon-game",
+    "headline": {
+      "ru": "Геймификации в Ozon",
+      "en": "Ozon Gamefication",
+      "tt": "Ozon геймификациясы"
+    },
+    "subline": {
+      "ru": "Дизайн интерфейсов и коммуникации",
+      "en": "Camera concept and prototype",
+      "tt": "Kamera kontsepti ham prototiby"
+    },
+    "date": "01/07/2025",
+    "published": true
+  },
+  {
+    "slug": "timebox-camera",
+    "headline": {
+      "ru": "Timebox Camera",
+      "en": "Timebox Camera",
+      "tt": "Timebox Camera"
+    },
+    "subline": {
+      "ru": "Управление таймлапс камерой",
+      "en": "Camera concept and prototype",
+      "tt": "Kamera kontsepti ham prototiby"
+    },
+    "date": "12/03/2024",
+    "published": true
+  },
+  {
+    "slug": "tofumaps",
+    "headline": {
+      "ru": "Tofu Maps",
+      "en": "Tofu Maps",
+      "tt": "Tofu Maps"
+    },
+    "subline": {
+      "ru": "Сервис для хранения мест",
+      "en": "Navigation and points map",
+      "tt": "Navigatsiya ham noktalar kartasy"
+    },
+    "date": "30/12/2025",
+    "published": true
+  },
+  {
+    "slug": "qryer",
+    "headline": {
+      "ru": "Q-RYER | Симулятор курьера",
+      "en": "Q-RYER | Courier Simulator",
+      "tt": "Q-RYER | курьер симуляторы"
+    },
+    "subline": {
+      "ru": "Симулятор доставки",
+      "en": "Delivery gameplay simulator",
+      "tt": "Dostavka uyyn simulatory"
+    },
+    "date": "10/11/2025",
+    "published": false
+  },
+  {
+    "slug": "velojol",
+    "headline": {
+      "ru": "VELOJOL | Карта велодорожек",
+      "en": "VELOJOL | Bike lanes map",
+      "tt": "VELOJOL | велоюллар картасы"
+    },
+    "subline": {
+      "ru": "Городская карта для велосипедистов",
+      "en": "Urban map for cyclists",
+      "tt": "Velosipedchylarga sheher kartasy"
+    },
+    "date": "31/10/2024",
+    "published": false
+  },
+  {
+    "slug": "qook-easy",
+    "headline": {
+      "ru": "Qook Easy",
+      "en": "Qook Easy",
+      "tt": "Qook Easy"
+    },
+    "subline": {
+      "ru": "Сервис доставки блюд",
+      "en": "Urban map for cyclists",
+      "tt": "Velosipedchylarga sheher kartasy"
+    },
+    "date": "30/09/2025",
+    "published": false
+  }
+]

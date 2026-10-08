@@ -1,0 +1,29 @@
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+  transition: 0.25s ease-in-out;
+}
+
+
+a:hover{
+  color: var(--hover);
+  transition: 0s ease-in-out;
+}
+
+
+.card__title{
+  color: var(--text);
+}
+
+.white{
+  color: var(--text-inverted);
+}
+
+.black{
+  color: var(--text);
+}
+
+.border{
+  color: var(--border);
+}

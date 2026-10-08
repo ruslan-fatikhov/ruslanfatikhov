@@ -1,0 +1,38 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<section class="admin-books">
+  <div class="admin-books__toolbar">
+    <a class="button" href="/admin">Назад</a>
+  </div>
+
+  {% if error %}
+    <p class="admin-books__alert admin-books__alert--error">{{ error }}</p>
+  {% endif %}
+  {% if saved %}
+    <p class="admin-books__alert admin-books__alert--ok">Сохранено</p>
+  {% endif %}
+
+  <form class="admin-form" method="post">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+    <input type="hidden" name="revision" value="{{ revision }}">
+    <div class="admin-form__section">
+      <div class="admin-form__header">
+        <div>
+          <h1>{{ editor_title }}</h1>
+          <p>{{ editor_description }}</p>
+        </div>
+      </div>
+
+      <label class="admin-form__field">
+        <span>JSON</span>
+        <textarea class="admin-json-editor__textarea" name="payload" rows="24" spellcheck="false">{{ payload }}</textarea>
+      </label>
+    </div>
+
+    <div class="admin-books__actions">
+      <button class="button" type="submit">{{ save_label }}</button>
+    </div>
+  </form>
+</section>
+{% endblock %}

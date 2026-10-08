@@ -1,0 +1,246 @@
+.collection_page {
+  margin: 0 auto;
+  padding-bottom: 100px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 1200px;
+  align-items: flex-start;
+}
+
+.collection-card__body h3 {
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.collection-card__cover {
+  transition: opacity 0.2s ease;
+}
+
+.collection-card:hover .collection-card__body h3 {
+  opacity: 1;
+}
+
+.collection-card:hover .collection-card__cover {
+  opacity: 0.25;
+}
+
+.collections__grid {
+  width: 100%;
+  display: grid;
+  gap: var(--space-2);
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+
+.collections__intro {
+  color: var(--muted);
+}
+
+.collection-card {
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  position: relative;
+  max-width: 400px;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1 / 1;
+}
+
+.collection-card:hover {
+  border-color: var(--black);
+}
+
+.collection-card--empty {
+  max-width: 420px;
+}
+
+.collection-card__cover,
+.collection-card__placeholder {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: var(--space-4);
+}
+
+.collection-card__preview-grid {
+  position: absolute;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  opacity: 0.25;
+}
+
+.collection-card__preview-grid > * {
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.collection-card__preview-item {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: var(--space-4);
+}
+
+.collection-card__body {
+  position: absolute;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  align-items: center;
+  justify-content: center;
+}
+
+.collection-card__year {
+  color: var(--muted);
+}
+
+.collection-hero {
+  overflow: hidden;
+  border-radius: var(--radius-2);
+  border: 1px solid var(--border);
+}
+
+.collection-hero img {
+  display: block;
+  width: 100%;
+  max-height: 520px;
+  object-fit: cover;
+}
+
+.collection-fields {
+  display: flex;
+  flex-direction: column;
+}
+
+.collection-fields__row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 54px;
+  align-items: center;
+  border-bottom: 1px solid var(--border) !important;
+
+}
+
+
+
+.collection-modal[hidden] {
+  display: none;
+}
+
+.collection-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+}
+
+.collection-modal__backdrop {
+  position: absolute;
+  inset: 0;
+  border: 0;
+  background: rgba(0, 0, 0, 0.32);
+  padding: 0;
+  cursor: pointer;
+}
+
+.collection-modal__sheet {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+  max-height: min(88vh, 920px);
+  overflow: auto;
+  border-radius: 4px 4px 0 0;
+  padding-bottom: 25%;
+  background: var(--bg);
+  transform: translateY(100%);
+  transition: transform 0.15s ease;
+}
+
+.collection-modal.is-open .collection-modal__sheet {
+  transform: translateY(0);
+}
+
+
+
+.collection-modal__header {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  background: var(--bg);
+}
+
+.collection-modal__header h2 {
+  margin: 0;
+}
+
+
+
+.collection-modal__content {
+  display: grid;
+  gap: var(--space-4);
+  padding: var(--space-4);
+  padding-bottom: 100px !important;
+}
+
+.collection-modal__gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: var(--space-1);
+}
+
+.collection-modal__gallery-item {
+  overflow: hidden;
+  aspect-ratio: 1 / 1;
+  background: var(--bg-secondary);
+  padding: 0;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.collection-modal__gallery-item img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: var(--space-4);
+}
+
+.collection-modal__fields {
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .collection_page {
+    padding-left: var(--space-3);
+    padding-right: var(--space-3);
+  }
+
+  .collection-modal__sheet {
+    max-height: 92vh;
+  }
+
+  .collection-modal__content {
+    padding: var(--space-3);
+  }
+}

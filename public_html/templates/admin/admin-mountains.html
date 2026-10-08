@@ -1,0 +1,89 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<section class="admin-books">
+  <div class="admin-books__toolbar">
+    <a class="button" href="/admin">Назад</a>
+    <a class="button" href="/mountains">Открыть карту</a>
+  </div>
+
+  {% if error %}
+    <p class="admin-books__alert admin-books__alert--error">{{ error }}</p>
+  {% elif message == "peak-created" %}
+    <p class="admin-books__alert admin-books__alert--ok">Вершина добавлена.</p>
+  {% elif message == "gpx-uploaded" %}
+    <p class="admin-books__alert admin-books__alert--ok">GPX-маршрут загружен.</p>
+  {% elif message == "peak-deleted" %}
+    <p class="admin-books__alert admin-books__alert--ok">Вершина удалена.</p>
+  {% elif message == "gpx-deleted" %}
+    <p class="admin-books__alert admin-books__alert--ok">GPX-маршрут удалён.</p>
+  {% endif %}
+
+  <div class="admin-mountains">
+    <form class="admin-mountains__form" method="post">
+      <h1>Добавить вершину</h1>
+      <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+      <input type="hidden" name="revision" value="{{ revision }}">
+      <input type="hidden" name="action" value="add-peak">
+      <label>Название <input type="text" name="name" required></label>
+      <label>Широта <input type="number" name="latitude" step="any" placeholder="43.117" required></label>
+      <label>Долгота <input type="number" name="longitude" step="any" placeholder="77.080" required></label>
+      <label>Высота, м <input type="number" name="elevation" step="any"></label>
+      <label>Дата восхождения <input type="date" name="summitedAt"></label>
+      <label class="admin-mountains__check"><input type="checkbox" name="isSummited" checked> Покорена</label>
+      <button class="button" type="submit">Сохранить вершину</button>
+    </form>
+
+    <form class="admin-mountains__form" method="post" enctype="multipart/form-data">
+      <h1>Загрузить GPX</h1>
+      <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+      <input type="hidden" name="revision" value="{{ revision }}">
+      <input type="hidden" name="action" value="upload-gpx">
+      <label>Название маршрута <input type="text" name="name"></label>
+      <label>GPX-файл <input type="file" name="gpx_file" accept=".gpx,application/gpx+xml" required></label>
+      <button class="button" type="submit">Загрузить маршрут</button>
+    </form>
+  </div>
+
+  <h2>Вершины</h2>
+  <div class="admin-collections-list">
+    {% for peak in peaks %}
+      <article class="admin-collection-card">
+        <div class="admin-collection-card__placeholder">{{ peak.elevation or "м" }}</div>
+        <div class="admin-collection-card__body">
+          <h2>{{ peak.name }}</h2>
+          <p>{{ peak.latitude }}, {{ peak.longitude }}</p>
+          <p>{{ "Покорена" if peak.isSummited else "Не покорена" }}{% if peak.summitedAt %} · {{ peak.summitedAt }}{% endif %}</p>
+          <form method="post" action="/admin/mountains/peaks/{{ peak.id }}/delete">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+            <input type="hidden" name="revision" value="{{ revision }}">
+            <button class="button" type="submit">Удалить</button>
+          </form>
+        </div>
+      </article>
+    {% else %}
+      <p>Вершины ещё не добавлены.</p>
+    {% endfor %}
+  </div>
+
+  <h2>GPX-маршруты</h2>
+  <div class="admin-collections-list">
+    {% for route in gpx_routes %}
+      <article class="admin-collection-card">
+        <div class="admin-collection-card__placeholder">GPX</div>
+        <div class="admin-collection-card__body">
+          <h2>{{ route.name }}</h2>
+          <p>{{ route.uploadedAt }}</p>
+          <form method="post" action="/admin/mountains/gpx/{{ route.id }}/delete">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+            <input type="hidden" name="revision" value="{{ revision }}">
+            <button class="button" type="submit">Удалить</button>
+          </form>
+        </div>
+      </article>
+    {% else %}
+      <p>GPX-маршруты ещё не загружены.</p>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}

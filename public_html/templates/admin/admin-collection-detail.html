@@ -1,0 +1,110 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<section class="admin-books">
+  <div class="admin-books__toolbar">
+    <a class="button" href="/admin/collections">Назад к коллекциям</a>
+    <a class="button" href="/admin/collections/{{ collection.id }}/edit">Редактировать коллекцию</a>
+    <a class="button" href="/admin/collections/{{ collection.id }}/items/new">Создать объект</a>
+    <a class="button" href="/collections/{{ collection.id }}">Паблик</a>
+  </div>
+
+  {% if message == "created" %}
+    <p class="admin-books__alert admin-books__alert--ok">Коллекция создана.</p>
+  {% elif message == "updated" %}
+    <p class="admin-books__alert admin-books__alert--ok">Коллекция сохранена.</p>
+  {% elif message == "item-created" %}
+    <p class="admin-books__alert admin-books__alert--ok">Объект создан.</p>
+  {% elif message == "item-updated" %}
+    <p class="admin-books__alert admin-books__alert--ok">Объект сохранён.</p>
+  {% elif message == "item-deleted" %}
+    <p class="admin-books__alert admin-books__alert--ok">Объект удалён.</p>
+  {% endif %}
+
+  <div class="admin-collection-meta">
+    {% if collection.cover_path %}
+      <img
+        class="admin-collection-meta__cover"
+        src="{{ asset_url(collection.cover_path) }}"
+        alt="{{ collection.title }}"
+        loading="lazy"
+        decoding="async"
+      >
+    {% endif %}
+
+    <div class="admin-collection-meta__body">
+      <h1>{{ collection.title }}</h1>
+      <p>{{ collection['items'] | length }} объектов · {{ collection['properties'] | length }} свойств</p>
+    </div>
+  </div>
+
+  <div class="admin-detail-grid">
+    <section class="admin-detail-card">
+      <div class="admin-form__header">
+        <div>
+          <h2>Свойства коллекции</h2>
+          <p>Поля задаются на уровне коллекции и автоматически появляются в форме объекта.</p>
+        </div>
+        <a class="button" href="/admin/collections/{{ collection.id }}/edit">Изменить свойства</a>
+      </div>
+
+      {% if collection['properties'] %}
+        <div class="admin-properties-preview">
+          {% for prop in collection['properties'] %}
+            <div class="admin-properties-preview__row">
+              <strong>{{ prop.label_ru }}</strong>
+              <span>{{ prop.label_en }}</span>
+              <span>{{ prop.key }}</span>
+            </div>
+          {% endfor %}
+        </div>
+      {% else %}
+        <p>Свойства ещё не добавлены.</p>
+      {% endif %}
+    </section>
+
+    <section class="admin-detail-card">
+      <div class="admin-form__header">
+        <div>
+          <h2>Объекты</h2>
+          <p>Форма объекта строится по списку свойств коллекции.</p>
+        </div>
+        <a class="button" href="/admin/collections/{{ collection.id }}/items/new">Создать объект</a>
+      </div>
+
+      {% if collection['items'] %}
+        <div class="admin-collection-items">
+          {% for item in collection['items'] %}
+            <article class="admin-collection-item-card">
+              {% if item.image_path %}
+                <img
+                  class="admin-collection-item-card__cover"
+                  src="{{ asset_url(item.image_path) }}"
+                  alt="{{ item.title }}"
+                  loading="lazy"
+                  decoding="async"
+                >
+              {% endif %}
+              <div class="admin-collection-item-card__body">
+                <h3>{{ item.title }}</h3>
+                <p>Заполнено полей: {{ item.fields_count }}</p>
+                <div class="admin-collection-card__actions">
+                  <a class="button" href="/collections/{{ collection.id }}/{{ item.id }}">Открыть</a>
+                  <a class="button" href="/admin/collections/{{ collection.id }}/items/{{ item.id }}/edit">Редактировать</a>
+                  <form method="post" action="/admin/collections/{{ collection.id }}/items/{{ item.id }}/delete">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+    <input type="hidden" name="revision" value="{{ revision }}">
+                    <button class="button" type="submit">Удалить</button>
+                  </form>
+                </div>
+              </div>
+            </article>
+          {% endfor %}
+        </div>
+      {% else %}
+        <p>Объектов пока нет.</p>
+      {% endif %}
+    </section>
+  </div>
+</section>
+{% endblock %}

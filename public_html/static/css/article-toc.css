@@ -1,0 +1,136 @@
+.article-toc {
+  position: fixed;
+  top: 50%;
+  left: 0px;
+  transform: translateY(-50%);
+  z-index: 5;
+  width: fit-content;
+  max-width: 320px;
+  overflow-x: hidden;
+  pointer-events: none;
+}
+
+.article-toc__mobile-head {
+  display: none;
+}
+
+.article-toc-overlay {
+  display: none;
+}
+
+.article-toc-toggle {
+  display: none;
+}
+
+.article-toc__list {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  gap: var(--space-2);
+  padding-left: var(--space-4);
+  pointer-events: none;
+}
+
+.article-toc__item {
+  pointer-events: none;
+}
+
+.article-toc__link {
+  display: inline-block;
+  color: var(--muted);
+  text-decoration: none;
+  line-height: 1.25;
+  font-size: var(--space-3);
+  color: var(--muted) !important;
+  transition: color var(--transition), border-color var(--transition), background-color var(--transition);
+  pointer-events: auto;
+}
+
+.article-toc__link:hover {
+  color: var(--accent) !important;
+}
+
+.article-toc__item--level-3 .article-toc__link {
+  opacity: 0.8;
+}
+
+.article-toc__link--active {
+  color: var(--text) !important;
+}
+
+@media (max-width: 900px) {
+  .article-toc-toggle {
+    display: inline-flex;
+    position: fixed;
+    right: var(--space-3);
+    bottom: var(--space-3);
+    z-index: 70;
+  }
+
+  .article-toc-overlay {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.35);
+    opacity: 0;
+    pointer-events: none;
+    z-index: 59;
+    transition: opacity var(--transition);
+  }
+
+  .article-toc-overlay[data-open="true"] {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .article-toc {
+    top: auto;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    transform: translateY(100%);
+    width: auto;
+    max-width: none;
+    max-height: 75vh;
+    margin: 0;
+    padding-left: var(--space-3);
+    padding-right: var(--space-3);
+    padding-bottom: var(--space-4);
+    border-radius: var(--space-4) var(--space-4) 0 0;
+    border-top: 1px solid var(--border);
+    background: var(--bg);
+    overflow-y: auto;
+    z-index: 600;
+    pointer-events: auto;
+    transition: transform var(--transition);
+  }
+
+  .article-toc[data-open="true"] {
+    transform: translateY(0);
+  }
+
+  .article-toc__mobile-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: var(--space-3);
+    margin-bottom: var(--space-2);
+  }
+
+  .article-toc__mobile-head h3{
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+
+  .article-toc__list {
+    padding-left: 0;
+    pointer-events: auto;
+  }
+
+  .article-toc__item {
+    pointer-events: auto;
+  }
+}

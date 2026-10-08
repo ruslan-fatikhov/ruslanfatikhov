@@ -1,0 +1,95 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<section class="admin-books">
+  <div class="admin-books__toolbar">
+    <a class="button" href="/admin">Назад</a>
+    <button class="button" type="button" data-add-feed-row>Добавить проект</button>
+  </div>
+
+  {% if error %}
+    <p class="admin-books__alert admin-books__alert--error">{{ error }}</p>
+  {% endif %}
+  {% if saved %}
+    <p class="admin-books__alert admin-books__alert--ok">Сохранено</p>
+  {% endif %}
+
+  <form class="admin-form" method="post" data-feed-form>
+    <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+    <input type="hidden" name="revision" value="{{ revision }}">
+    <div class="admin-feed-list" data-feed-list></div>
+    <div class="admin-books__actions">
+      <button class="button" type="submit">Сохранить проекты</button>
+    </div>
+  </form>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+(() => {
+  const rows = {{ rows | tojson }};
+  const list = document.querySelector('[data-feed-list]');
+  const addButton = document.querySelector('[data-add-feed-row]');
+  const esc = (value) =>
+    String(value ?? '')
+      .replaceAll('&', '&amp;')
+      .replaceAll('<', '&lt;')
+      .replaceAll('>', '&gt;')
+      .replaceAll('"', '&quot;');
+
+  let nextIndex = 0;
+
+  function renderRow(row = {}) {
+    const index = nextIndex;
+    nextIndex += 1;
+    const headline = row.headline || {};
+    const subline = row.subline || {};
+    const article = document.createElement('article');
+    article.className = 'admin-feed-card';
+    article.innerHTML = `
+      <div class="admin-feed-card__head">
+        <label class="admin-form__field">
+          <span>Slug</span>
+          <input type="text" name="slug-${index}" value="${esc(row.slug)}" placeholder="project-slug" pattern="[a-z0-9-]+">
+        </label>
+        <label class="admin-form__field">
+          <span>Дата</span>
+          <input type="text" name="date-${index}" value="${esc(row.date)}" placeholder="dd/mm/yyyy">
+        </label>
+        <label class="admin-feed-card__check">
+          <input type="checkbox" name="published-${index}" ${row.published !== false ? 'checked' : ''}>
+          <span>Опубликовано</span>
+        </label>
+        <button class="button" type="button" data-remove-feed-row>Удалить</button>
+      </div>
+      <div class="admin-feed-card__grid">
+        ${['ru', 'en', 'tt'].map((lang) => `
+          <div class="admin-feed-card__lang">
+            <h2>${lang.toUpperCase()}</h2>
+            <label class="admin-form__field">
+              <span>Заголовок</span>
+              <input type="text" name="headline_${lang}-${index}" value="${esc(headline[lang])}">
+            </label>
+            <label class="admin-form__field">
+              <span>Описание</span>
+              <textarea name="subline_${lang}-${index}" rows="3">${esc(subline[lang])}</textarea>
+            </label>
+          </div>
+        `).join('')}
+      </div>
+    `;
+    article.querySelector('[data-remove-feed-row]').addEventListener('click', () => article.remove());
+    list.appendChild(article);
+  }
+
+  addButton.addEventListener('click', () => renderRow({ published: true }));
+  if (rows.length === 0) {
+    renderRow({ published: true });
+  } else {
+    rows.forEach(renderRow);
+  }
+})();
+</script>
+{% endblock %}
+

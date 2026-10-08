@@ -1,0 +1,87 @@
+{
+  "collections": [
+    {
+      "id": "ipod",
+      "title": "iPod",
+      "cover_image": "",
+      "properties": [
+        {
+          "id": "model",
+          "key": "model",
+          "label": "Model",
+          "type": "text"
+        }
+      ],
+      "items": [
+        {
+          "id": "ipod-touch-1",
+          "title": "iPod Touch 1",
+          "image": "img-1003-3b1e6df2.png",
+          "images": [
+            "img-1003-3b1e6df2.png",
+            "img-1004-bb44f31b.png"
+          ],
+          "values": {
+            "model": ""
+          }
+        },
+        {
+          "id": "ipod-touch-2",
+          "title": "iPod Touch 2",
+          "image": "img-1019-9d1c78c8.png",
+          "images": [
+            "img-1019-9d1c78c8.png",
+            "img-1020-c15edb89.png"
+          ],
+          "values": {
+            "model": ""
+          }
+        },
+        {
+          "id": "ipod-touch-4",
+          "title": "iPod Touch 4",
+          "image": "img-1005-fd856fd0.png",
+          "images": [
+            "img-1005-fd856fd0.png",
+            "img-1006-627b8c9b.png"
+          ],
+          "values": {
+            "model": ""
+          }
+        },
+        {
+          "id": "ipod-classic-4",
+          "title": "iPod Classic 4",
+          "image": "img-1007-fc3a77d7.png",
+          "images": [
+            "img-1007-fc3a77d7.png",
+            "img-1008-ad1f5aa3.png"
+          ],
+          "values": {
+            "model": ""
+          }
+        }
+      ]
+    },
+    {
+      "id": "collection",
+      "title": "Транспортные карты",
+      "cover_image": "",
+      "properties": [
+        {
+          "id": "city",
+          "key": "city",
+          "label": "Город",
+          "type": "text"
+        },
+        {
+          "id": "transport-type",
+          "key": "transport_type",
+          "label": "Транспорт",
+          "type": "text"
+        }
+      ],
+      "items": []
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+<header class="site-header">
+  <nav aria-label="Основная навигация">
+    <a href="/?lang={{ lang }}">Главная</a>
+    <a href="/about?lang={{ lang }}">Обо мне</a>
+    <a href="/cities?lang={{ lang }}">Города</a>
+    <a href="/mountains?lang={{ lang }}">Горы</a>
+    <a href="/books?lang={{ lang }}">Книги</a>
+    <a href="/products?lang={{ lang }}">Проекты</a>
+    <a href="/collections?lang={{ lang }}">Коллекции</a>
+    <a href="/cv?lang={{ lang }}">Резюме</a>
+    <button type="button" data-action="open-search">Поиск</button>
+    <span aria-label="Язык">{% for code in supported_langs %}<button type="button" data-lang="{{ code }}" aria-label="Русский">{{ code|upper }}</button>{% endfor %}</span>
+  </nav>
+</header>
+<div class="search-dialog" data-search role="dialog" aria-modal="true" aria-label="Поиск по статьям" hidden>
+  <div class="search-dialog__body">
+    <button type="button" data-action="close-search">Закрыть</button>
+    <label>Поиск по статьям <input type="search" data-search-input placeholder="Введите запрос"></label>
+    <div data-search-results aria-live="polite"></div>
+  </div>
+</div>

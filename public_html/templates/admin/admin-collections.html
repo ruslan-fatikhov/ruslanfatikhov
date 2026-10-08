@@ -1,0 +1,55 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<section class="admin-books">
+  <div class="admin-books__toolbar">
+    <a class="button" href="/admin">Назад</a>
+    <a class="button" href="/admin/collections/new">Создать коллекцию</a>
+  </div>
+
+  {% if message == "deleted" %}
+    <p class="admin-books__alert admin-books__alert--ok">Коллекция удалена.</p>
+  {% endif %}
+
+  {% if collections %}
+    <div class="admin-collections-list">
+      {% for collection in collections %}
+        <article class="admin-collection-card">
+          {% if collection.cover_path %}
+            <img
+              class="admin-collection-card__cover"
+              src="{{ asset_url(collection.cover_path) }}"
+              alt="{{ collection.title }}"
+              loading="lazy"
+              decoding="async"
+            >
+          {% else %}
+            <div class="admin-collection-card__placeholder">No cover</div>
+          {% endif %}
+
+          <div class="admin-collection-card__body">
+            <h2>{{ collection.title }}</h2>
+            <p>{{ collection.items_count }} объектов · {{ collection.properties_count }} свойств</p>
+
+            <div class="admin-collection-card__actions">
+              <a class="button" href="/admin/collections/{{ collection.id }}">Открыть</a>
+              <a class="button" href="/admin/collections/{{ collection.id }}/edit">Редактировать</a>
+              <a class="button" href="/collections/{{ collection.id }}">Паблик</a>
+              <form method="post" action="/admin/collections/{{ collection.id }}/delete">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+    <input type="hidden" name="revision" value="{{ revision }}">
+                <button class="button" type="submit">Удалить</button>
+              </form>
+            </div>
+          </div>
+        </article>
+      {% endfor %}
+    </div>
+  {% else %}
+    <div class="admin-empty__card">
+      <h1>Коллекций пока нет</h1>
+      <p>Создайте первую коллекцию, затем добавьте свойства и объекты внутри неё.</p>
+    </div>
+  {% endif %}
+</section>
+{% endblock %}

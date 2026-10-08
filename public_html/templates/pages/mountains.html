@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+
+{% block extra_css %}
+  <link rel="stylesheet" href="{{ asset_url('css/mountains.css') }}">
+{% endblock %}
+
+{% block content %}
+<section class="mountains">
+  <aside class="mountains__panel">
+    <h1>Горы</h1>
+    <p>Покорённые вершины и сохранённые GPX-маршруты.</p>
+    <div class="mountains__stats" data-mountains-stats>
+      <span>Вершин: 0</span>
+      <span>Маршрутов: 0</span>
+    </div>
+    <div class="mountains__routes" data-mountains-routes></div>
+    <div class="mountains__empty" data-mountains-empty hidden>Пока нет сохранённых вершин или GPX-маршрутов.</div>
+  </aside>
+  <div class="mountains__map-wrap">
+    <div id="mountains-map" class="mountains__map">
+      <div class="mountains__map-status" role="status">Карта загружается.</div>
+    </div>
+  </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+  <script src="{{ asset_url('js/maplibre-openfreemap.js') }}" defer></script>
+  <script src="{{ asset_url('js/mountains-data.js') }}" defer></script>
+  <script src="{{ asset_url('js/mountains-peaks.js') }}" defer></script>
+  <script src="{{ asset_url('js/mountains-gpx.js') }}" defer></script>
+  <script src="{{ asset_url('js/mountains.js') }}" defer></script>
+{% endblock %}

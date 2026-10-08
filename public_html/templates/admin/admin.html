@@ -1,0 +1,42 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<section class="admin-dashboard">
+  <div class="admin-dashboard__header">
+    <div>
+      <h1>Управление контентом</h1>
+      <p>Все разделы сайта без ручного редактирования JSON.</p>
+    </div>
+    <form method="post" action="/admin/logout">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+      <input type="hidden" name="revision" value="{{ revision }}">
+      <button type="submit" class="button">Выйти</button>
+    </form>
+  </div>
+
+  <div class="admin-dashboard-stats">
+    {% for stat in dashboard.stats %}
+      <article class="admin-dashboard-stats__card">
+        <strong>{{ stat.value }}</strong>
+        <span>{{ stat.label }}</span>
+        <small>{{ stat.detail }}</small>
+      </article>
+    {% endfor %}
+  </div>
+
+  <div class="admin-dashboard-grid">
+    {% for section in dashboard.sections %}
+      <article class="admin-dashboard-card">
+        <div>
+          <h2>{{ section.title }}</h2>
+          <p>{{ section.description }}</p>
+        </div>
+        <div class="admin-dashboard-card__actions">
+          <a class="button" href="{{ section.url }}">{{ section.primary }}</a>
+          <a class="button" href="{{ section.public_url }}">Паблик</a>
+        </div>
+      </article>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}

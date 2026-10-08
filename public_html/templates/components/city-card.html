@@ -1,0 +1,22 @@
+<a
+  href="/cities/{{ city.slug }}"
+  class="city_list_cell"
+  data-city-card
+  data-lat="{{ city.coords[0] }}"
+  data-lng="{{ city.coords[1] }}"
+  data-name="{{ city.name }}"
+  data-country="{{ city.country }}"
+  data-slug="{{ city.slug }}"
+  data-thumb="{{ city.thumb }}"
+  data-count="{{ city.count }}"
+>
+  {% if city.thumb %}
+  <div class="card__media">
+    <img src="{{ city.thumb }}" alt="{{ city.name }}">
+    <span class="city_badge">{{ city.count }}</span>
+  </div>
+  {% endif %}
+  <div class="city_cell_body">
+    <div class="card__title">{{ city.name }}</div>
+  </div>
+</a>

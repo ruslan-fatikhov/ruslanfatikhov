@@ -1,0 +1,71 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<section class="admin-books">
+  <div class="admin-books__toolbar">
+    <a class="button" href="/admin/cities">Назад к cities</a>
+  </div>
+
+  {% if error %}
+    <p class="admin-books__alert admin-books__alert--error">{{ error }}</p>
+  {% endif %}
+
+  <form class="admin-form" method="post" enctype="multipart/form-data">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+    <input type="hidden" name="revision" value="{{ revision }}">
+    <div class="admin-form__section">
+      <label class="admin-form__field">
+        <span>Название</span>
+        <input type="text" name="name" value="{{ city.name }}" required>
+      </label>
+
+      <label class="admin-form__field">
+        <span>Название на English</span>
+        <input type="text" name="name_en" value="{{ city.name_en }}" required>
+      </label>
+
+      <label class="admin-form__field">
+        <span>Страна</span>
+        <input type="text" name="country" value="{{ city.country }}" required>
+      </label>
+
+      <label class="admin-form__field">
+        <span>Страна на English</span>
+        <input type="text" name="country_en" value="{{ city.country_en }}" required>
+      </label>
+
+      <label class="admin-form__field">
+        <span>Фото</span>
+        <input type="file" name="photos" accept="image/jpeg,image/png,image/webp,image/gif" multiple {% if form_mode == "create" %}required{% endif %}>
+      </label>
+
+      <div class="admin-form__field">
+        <span>Локация</span>
+        <input type="hidden" name="location" value="{{ city.location }}" required data-city-location-input>
+        <div class="admin-location-map" data-city-location-map>
+          <div class="admin-location-map__empty" role="status">Карта загрузится при просмотре.</div>
+        </div>
+        <output class="admin-location-map__value" data-city-location-value>
+          {{ city.location or "Поставьте пин на карте" }}
+        </output>
+      </div>
+
+      <label class="admin-form__field">
+        <span>Slug</span>
+        <input type="text" name="slug" value="{{ city.slug }}" placeholder="kazan" required>
+      </label>
+    </div>
+
+    <div class="admin-books__actions">
+      <button class="button" type="submit">
+        {% if form_mode == "edit" %}Сохранить город{% else %}Создать город{% endif %}
+      </button>
+    </div>
+  </form>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+  <script src="{{ asset_url('js/maplibre-openfreemap.js') }}" defer></script>
+  <script src="{{ asset_url('js/admin-city-map.js') }}" defer></script>
+{% endblock %}

@@ -1,0 +1,60 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<article class="article" data-article="">
+  {% if image %}
+    <div class="article__cover">
+      <img src="{{ image }}" alt="{{ title }}" loading="eager" fetchpriority="high" decoding="async">
+    </div>
+  {% endif %}
+  {% set heading = display_title if display_title is defined else title %}
+  {% if heading %}
+    <h1 class="article__title">{{ heading }}</h1>
+  {% endif %}
+
+  <div class="article__content">
+
+    <!--Navigation-->
+    <button class="button btn_icon btn_shadow article-toc-toggle" data-article-toc-toggle type="button" hidden>
+      <img src="{{ asset_url('img/icon/navigation.svg') }}" alt="navigation" loading="eager" fetchpriority="high" decoding="async" />
+    </button>
+
+    <div class="article-toc-overlay" data-article-toc-overlay hidden></div>
+    <nav class="article-toc" data-article-toc hidden aria-label="Article sections">
+      <div class="article-toc__mobile-head">
+        <h3>Навигация</h3>
+        <button class="btn_icon" type="button" data-article-toc-close aria-label="Close navigation">
+          <img src="{{ asset_url('img/icon/cross.svg') }}" alt="navigation" loading="eager" fetchpriority="high" decoding="async" />
+        </button>
+      </div>
+      <ul class="article-toc__list" data-article-toc-list></ul>
+    </nav>
+    <div class="article__prose" data-article-prose>
+      {{ content | safe }}
+    </div>
+  </div>
+</article>
+
+<div class="gallery-viewer" data-gallery-viewer role="dialog" aria-modal="true" aria-label="Просмотр изображения" hidden>
+  <div class="gallery-viewer__overlay" data-gallery-close></div>
+  <button class="btn_icon" data-gallery-close>✕</button>
+  <button class="gallery-viewer__nav" data-gallery-prev>‹</button>
+  <img class="gallery-viewer__image" data-gallery-image alt="">
+  <button class="gallery-viewer__nav" data-gallery-next>›</button>
+  <div class="gallery-viewer__footer">
+    <div class="gallery-viewer__count" data-gallery-count></div>
+    <a class="button" data-gallery-download download data-i18n="buttons.download">{{ t.buttons.download }}</a>
+  </div>
+</div>
+{% endblock %}
+
+{% block extra_css %}
+  <link rel="stylesheet" href="{{ asset_url('css/article-toc.css') }}">
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ asset_url('js/video.js') }}" defer></script>
+  <script src="{{ asset_url('js/article-toc.js') }}" defer></script>
+  <script src="{{ asset_url('js/gallery.js') }}" defer></script>
+{% endblock %}

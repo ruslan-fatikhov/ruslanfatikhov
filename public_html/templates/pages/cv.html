@@ -1,0 +1,39 @@
+{% extends "layout.html" %}
+
+{% block extra_css %}
+  <link rel="stylesheet" href="{{ asset_url('css/article-toc.css') }}">
+{% endblock %}
+
+{% block content %}
+<article class="article" data-article="">
+  <div class="cv-actions mt4 mb4">
+    <h1>{{ title }}</h1>
+    {# Кнопка ведёт в роут /cv/download. При необходимости меняйте сам путь к PDF в routes.py, а не этот href. #}
+    <a class="button" href="{{ download_url }}">{{ t.buttons.download }}</a>
+  </div>
+
+  <div class="article__content">
+    <button class="button btn_icon btn_shadow article-toc-toggle" data-article-toc-toggle type="button" hidden>
+      <img src="{{ asset_url('img/icon/navigation.svg') }}" alt="navigation" loading="eager" fetchpriority="high" decoding="async" />
+    </button>
+
+    <div class="article-toc-overlay" data-article-toc-overlay hidden></div>
+    <nav class="article-toc" data-article-toc hidden aria-label="Article sections">
+      <div class="article-toc__mobile-head">
+        <h3>Навигация</h3>
+        <button class="btn_icon" type="button" data-article-toc-close aria-label="Close navigation">
+          <img src="{{ asset_url('img/icon/cross.svg') }}" alt="navigation" loading="eager" fetchpriority="high" decoding="async" />
+        </button>
+      </div>
+      <ul class="article-toc__list" data-article-toc-list></ul>
+    </nav>
+    <div class="article__prose" data-article-prose>
+      {{ content | safe }}
+    </div>
+  </div>
+</article>
+{% endblock %}
+
+{% block extra_js %}
+  <script src="{{ asset_url('js/article-toc.js') }}" defer></script>
+{% endblock %}

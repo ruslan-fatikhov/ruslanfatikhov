@@ -1,0 +1,83 @@
+.card {
+  position: relative;
+  width: 100%;
+  height: 500px;
+  aspect-ratio: 2 / 1;
+  overflow: hidden;
+  border-radius: var(--space-2);
+  overflow: hidden;
+
+  display: flex;
+  transition: 0.25s ease-in-out;
+}
+
+.card:hover{
+  transform: scale(0.99);
+  transition: 0.05s ease-in-out;
+}
+
+.card__link {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.card__media{
+  display: block;
+  width: 48px;
+  height: 48px;
+  object-fit: cover;
+  position: relative;
+}
+
+.card__media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 14px;
+}
+
+.card__media_feed{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+
+.card__body {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  padding: var(--space-4);
+  gap: var(--space-2);
+  display: flex;
+  flex-direction: column;
+}
+
+.card__title{
+  font-size: 1em;
+  line-height: 100%;
+}
+
+.card__meta{
+  font-size: 0.8em;
+  line-height: 100%;
+}
+
+
+
+@media screen and (max-width:700px) {
+
+  .card{
+    height: 340px;
+  }
+
+
+  .card__body{
+    padding: var(--space-3);
+    gap: var(--space-1);
+  }
+}

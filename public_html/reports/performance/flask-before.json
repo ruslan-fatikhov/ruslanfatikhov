@@ -1,0 +1,20 @@
+{
+  "/": {
+    "first_ms": 13.77,
+    "median_ms": 0.84,
+    "p95_ms": 1.08,
+    "html_bytes": 8860
+  },
+  "/cities": {
+    "first_ms": 4.54,
+    "median_ms": 1.51,
+    "p95_ms": 1.67,
+    "html_bytes": 16116
+  },
+  "/timebox-camera": {
+    "first_ms": 18.65,
+    "median_ms": 5.76,
+    "p95_ms": 6.62,
+    "html_bytes": 19869
+  }
+}

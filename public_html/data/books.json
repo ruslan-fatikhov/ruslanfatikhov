@@ -1,0 +1,70 @@
+[
+  {
+    "year": 2023,
+    "books": [
+      {
+        "author": "Лион Фейхтвангер",
+        "title": "Москва 1937",
+        "cover": "moscow-1937",
+        "fav": false
+      },
+      {
+        "author": "Энн Эплбаум",
+        "title": "Гулаг",
+        "cover": "gulag",
+        "fav": false
+      },
+      {
+        "author": "Евгений Щепин",
+        "title": "Вкусвилл: Как совершить революцию в ритейле, делая не как все",
+        "cover": "vkusvill",
+        "fav": false
+      }
+    ]
+  },
+  {
+    "year": 2024,
+    "books": [
+      {
+        "author": "Елена Костюченко",
+        "title": "Моя любимая страна",
+        "cover": "my-country",
+        "fav": false
+      }
+    ]
+  },
+  {
+    "year": 2025,
+    "books": [
+      {
+        "author": "Арсен Томский",
+        "title": "inDriver от Якутска до Кремниевой Долины",
+        "cover": "indriver",
+        "fav": false
+      },
+      {
+        "author": "Джип Кэмп",
+        "title": "Сначала скажите \"Нет\"",
+        "cover": "say-no",
+        "fav": false
+      },
+      {
+        "author": "Уолтер Айзексон",
+        "title": "Стив Джобс",
+        "cover": "stevejobs",
+        "fav": false
+      }
+    ]
+  },
+  {
+    "year": 2019,
+    "books": [
+      {
+        "author": "Джейсон Шраер",
+        "title": "Кровь пот и пиксели",
+        "cover": "bloodandpixels",
+        "fav": false
+      }
+    ]
+  }
+]

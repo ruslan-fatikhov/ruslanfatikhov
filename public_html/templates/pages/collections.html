@@ -1,0 +1,52 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<section class="collection_page">
+  <div class="mt4 mb4">
+    <h1 class="black">Collections</h1>
+  </div>
+
+  {% if collections %}
+    <div class="collections__grid">
+      {% for item in collections %}
+        <a href="/collections/{{ item.id }}" class="collection-card collection-card--collection">
+          {% if item.cover_path %}
+            <img
+              class="collection-card__cover"
+              src="{{ thumbnail_url(item.cover_path) }}"
+              alt="{{ item.title }}"
+              loading="lazy"
+              decoding="async"
+            >
+          {% elif item.preview_images %}
+            <div class="collection-card__preview-grid" aria-hidden="true">
+              {% for image_path in item.preview_images %}
+                <img
+                  class="collection-card__preview-item"
+                  src="{{ thumbnail_url(image_path) }}"
+                  alt=""
+                  loading="lazy"
+                  decoding="async"
+                >
+              {% endfor %}
+            </div>
+          {% else %}
+            <div class="collection-card__placeholder">{{ item.items_count }}</div>
+          {% endif %}
+
+          <div class="collection-card__body">
+            <h2 class="black fw500">{{ item.title }}</h2>
+          </div>
+        </a>
+      {% endfor %}
+    </div>
+  {% else %}
+    <div class="collection-card collection-card--empty">
+      <div class="collection-card__body">
+        <h2>Коллекции пока не добавлены</h2>
+        <p>Публичный каталог появится после наполнения через админку.</p>
+      </div>
+    </div>
+  {% endif %}
+</section>
+{% endblock %}

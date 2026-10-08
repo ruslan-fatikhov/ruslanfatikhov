@@ -1,0 +1,160 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<section class="admin-books">
+  <div class="admin-books__toolbar">
+    <a class="button" href="/admin/collections">Назад к списку</a>
+    {% if form_mode == "edit" %}
+      <a class="button" href="/admin/collections/{{ collection.id }}">Открыть коллекцию</a>
+    {% endif %}
+  </div>
+
+  {% if error %}
+    <p class="admin-books__alert admin-books__alert--error">{{ error }}</p>
+  {% endif %}
+
+  <form class="admin-form" method="post" data-collection-form>
+    <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+    <input type="hidden" name="revision" value="{{ revision }}">
+    <input type="hidden" name="payload" data-collection-payload>
+
+    <div class="admin-form__section">
+      <label class="admin-form__field">
+        <span>Название коллекции</span>
+        <input type="text" data-collection-title value="{{ collection.title }}" required>
+      </label>
+
+      <label class="admin-form__field">
+        <span>Обложка</span>
+        <input type="text" data-collection-cover value="{{ collection.cover_image }}" placeholder="collection-cover.jpg">
+      </label>
+    </div>
+
+    <div class="admin-form__section">
+      <div class="admin-form__header">
+        <div>
+          <h2>Свойства коллекции</h2>
+          <p>У каждого свойства есть технический key, Label RU и Label EN.</p>
+        </div>
+        <button class="button" type="button" data-add-property>Добавить свойство</button>
+      </div>
+
+      <div class="admin-properties" data-properties-list></div>
+    </div>
+
+    <div class="admin-books__actions">
+      <button class="button" type="submit">
+        {% if form_mode == "edit" %}Сохранить коллекцию{% else %}Создать коллекцию{% endif %}
+      </button>
+    </div>
+  </form>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+(() => {
+  const initialProperties = {{ collection['properties'] | tojson }};
+  const form = document.querySelector('[data-collection-form]');
+  const payloadInput = document.querySelector('[data-collection-payload]');
+  const titleInput = document.querySelector('[data-collection-title]');
+  const coverInput = document.querySelector('[data-collection-cover]');
+  const addPropertyBtn = document.querySelector('[data-add-property]');
+  const list = document.querySelector('[data-properties-list]');
+  const esc = (value) =>
+    String(value ?? '')
+      .replaceAll('&', '&amp;')
+      .replaceAll('<', '&lt;')
+      .replaceAll('>', '&gt;')
+      .replaceAll('"', '&quot;');
+
+  function syncMoveButtons() {
+    const rows = Array.from(list.querySelectorAll('[data-property-row]'));
+    rows.forEach((row, index) => {
+      row.querySelector('[data-move-up]').disabled = index === 0;
+      row.querySelector('[data-move-down]').disabled = index === rows.length - 1;
+    });
+  }
+
+  function renderPropertyRow(property = {}) {
+    const label = property.label || {};
+    const labelRu = typeof label === 'object' ? label.ru : label;
+    const labelEn = typeof label === 'object' ? label.en : label;
+    const row = document.createElement('div');
+    row.className = 'admin-property-row';
+    row.setAttribute('data-property-row', '');
+    row.innerHTML = `
+      <input type="hidden" data-field="id" value="${esc(property.id)}">
+      <label class="admin-form__field">
+        <span>Label RU</span>
+        <input type="text" data-field="label_ru" value="${esc(property.label_ru ?? labelRu)}" placeholder="Модель">
+      </label>
+      <label class="admin-form__field">
+        <span>Label EN</span>
+        <input type="text" data-field="label_en" value="${esc(property.label_en ?? labelEn)}" placeholder="Model">
+      </label>
+      <label class="admin-form__field">
+        <span>Key</span>
+        <input type="text" data-field="key" value="${esc(property.key)}" placeholder="author">
+      </label>
+      <div class="admin-property-row__actions">
+        <button class="button" type="button" data-move-up>Вверх</button>
+        <button class="button" type="button" data-move-down>Вниз</button>
+        <button class="button" type="button" data-remove>Удалить</button>
+      </div>
+    `;
+
+    row.querySelector('[data-remove]').addEventListener('click', () => {
+      row.remove();
+      syncMoveButtons();
+    });
+
+    row.querySelector('[data-move-up]').addEventListener('click', () => {
+      const prev = row.previousElementSibling;
+      if (prev) {
+        list.insertBefore(row, prev);
+        syncMoveButtons();
+      }
+    });
+
+    row.querySelector('[data-move-down]').addEventListener('click', () => {
+      const next = row.nextElementSibling;
+      if (next) {
+        list.insertBefore(next, row);
+        syncMoveButtons();
+      }
+    });
+
+    list.appendChild(row);
+    syncMoveButtons();
+  }
+
+  function collectProperties() {
+    return Array.from(list.querySelectorAll('[data-property-row]')).map((row) => ({
+      id: row.querySelector('[data-field="id"]').value,
+      label: {
+        ru: row.querySelector('[data-field="label_ru"]').value,
+        en: row.querySelector('[data-field="label_en"]').value,
+      },
+      key: row.querySelector('[data-field="key"]').value,
+    }));
+  }
+
+  addPropertyBtn.addEventListener('click', () => renderPropertyRow());
+
+  form.addEventListener('submit', () => {
+    payloadInput.value = JSON.stringify({
+      title: titleInput.value,
+      cover_image: coverInput.value,
+      properties: collectProperties(),
+    });
+  });
+
+  if (initialProperties.length === 0) {
+    renderPropertyRow();
+  } else {
+    initialProperties.forEach((property) => renderPropertyRow(property));
+  }
+})();
+</script>
+{% endblock %}

@@ -1,0 +1,12 @@
+.env
+.venv/
+venv/
+pydeps/
+__pycache__/
+*.pyc
+*.log
+.DS_Store
+data/.session-secret
+data/.write.lock
+data/.login-attempts.json
+static/img/thumbnails/

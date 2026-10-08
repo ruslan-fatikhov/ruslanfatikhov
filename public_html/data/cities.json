@@ -1,0 +1,227 @@
+[
+  {
+    "name": "Анкара",
+    "country": "Турция",
+    "location": {
+      "lat": 39.92078350348896,
+      "lng": 32.854047718792685
+    },
+    "slug": "ankara"
+  },
+  {
+    "name": "Казань",
+    "country": "Россия",
+    "location": {
+      "lat": 55.790881084774696,
+      "lng": 49.114546463350706
+    },
+    "slug": "kazan"
+  },
+  {
+    "name": "Москва",
+    "country": "Россия",
+    "location": {
+      "lat": 55.7504442701437,
+      "lng": 37.6174490663615
+    },
+    "slug": "moscow"
+  },
+  {
+    "name": "Санкт-Петербург",
+    "country": "Россия",
+    "location": {
+      "lat": 59.94034726388128,
+      "lng": 30.317383622072867
+    },
+    "slug": "saintp"
+  },
+  {
+    "name": "Астана",
+    "country": "Казахстан",
+    "location": {
+      "lat": 51.1694,
+      "lng": 71.4491
+    },
+    "slug": "astana"
+  },
+  {
+    "name": "Алматы",
+    "country": "Казахстан",
+    "location": {
+      "lat": 43.2389,
+      "lng": 76.8897
+    },
+    "slug": "almaty"
+  },
+  {
+    "name": "Шымкент",
+    "country": "Казахстан",
+    "location": {
+      "lat": 42.3417,
+      "lng": 69.5901
+    },
+    "slug": "shymkent"
+  },
+  {
+    "name": "Бишкек",
+    "country": "Кыргызстан",
+    "location": {
+      "lat": 42.8746,
+      "lng": 74.5698
+    },
+    "slug": "bishkek"
+  },
+  {
+    "name": "Нижний Новгород",
+    "country": "Россия",
+    "location": {
+      "lat": 56.2965,
+      "lng": 43.9361
+    },
+    "slug": "nn"
+  },
+  {
+    "name": "Павлодар",
+    "country": "Казахстан",
+    "location": {
+      "lat": 52.2871,
+      "lng": 76.9674
+    },
+    "slug": "pavlodar"
+  },
+  {
+    "name": "Пхукет",
+    "country": "Тайланд",
+    "location": {
+      "lat": 7.8804,
+      "lng": 98.3923
+    },
+    "slug": "phuket"
+  },
+  {
+    "name": "Паттайя",
+    "country": "Тайланд",
+    "location": {
+      "lat": 12.9236,
+      "lng": 100.8825
+    },
+    "slug": "phattaya"
+  },
+  {
+    "name": "Бангкок",
+    "country": "Тайланд",
+    "location": {
+      "lat": 13.7563,
+      "lng": 100.5018
+    },
+    "slug": "bangkok"
+  },
+  {
+    "name": "Куала-Лумпур",
+    "country": "Малайзия",
+    "location": {
+      "lat": 3.139,
+      "lng": 101.6869
+    },
+    "slug": "kl"
+  },
+  {
+    "name": "Баку",
+    "country": "Азербайджан",
+    "location": {
+      "lat": 40.4093,
+      "lng": 49.8671
+    },
+    "slug": "baku"
+  },
+  {
+    "name": "Дубай",
+    "country": "ОАЭ",
+    "location": {
+      "lat": 25.2048,
+      "lng": 55.2708
+    },
+    "slug": "dubai"
+  },
+  {
+    "name": "Шарджа",
+    "country": "ОАЭ",
+    "location": {
+      "lat": 25.3463,
+      "lng": 55.4209
+    },
+    "slug": "sharjah"
+  },
+  {
+    "name": "Гонконг",
+    "country": "Гонконг",
+    "location": {
+      "lat": 22.3193,
+      "lng": 114.1694
+    },
+    "slug": "hk"
+  },
+  {
+    "name": "Стамбул",
+    "country": "Турция",
+    "location": {
+      "lat": 41.0082,
+      "lng": 28.9784
+    },
+    "slug": "istambul"
+  },
+  {
+    "name": "Эскишехир",
+    "country": "Турция",
+    "location": {
+      "lat": 39.7667,
+      "lng": 30.5256
+    },
+    "slug": "eski"
+  },
+  {
+    "name": "Караганда",
+    "country": "Казахстан",
+    "location": {
+      "lat": 49.816517,
+      "lng": 73.102832
+    },
+    "slug": "karaganda"
+  },
+  {
+    "name": "Темиртау",
+    "country": "Казахстан",
+    "location": {
+      "lat": 50.059583,
+      "lng": 72.95384
+    },
+    "slug": "temirtau"
+  },
+  {
+    "name": "Дананг",
+    "country": "Вьетнам",
+    "location": {
+      "lat": 16.069591,
+      "lng": 108.224626
+    },
+    "slug": "danang"
+  },
+  {
+    "name": "Нячанг",
+    "country": "Казахстан",
+    "location": {
+      "lat": 12.250105,
+      "lng": 109.189437
+    },
+    "slug": "nhatrang"
+  },
+  {
+    "name": "Далат",
+    "country": "Вьетнам",
+    "slug": "dalat",
+    "location": {
+      "lat": 11.941517,
+      "lng": 108.439424
+    }
+  }
+]

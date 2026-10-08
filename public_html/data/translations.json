@@ -1,0 +1,134 @@
+{
+  "ru": {
+    "site": {
+      "title": "Руслан Фатихов",
+      "description": "Личный сайт и портфолио"
+    },
+    "nav": {
+      "services": "Сервисы",
+      "cities": "Cities",
+      "products": "Products",
+      "collections": "Collections",
+      "menu": "Меню",
+      "search": "Поиск"
+    },
+    "buttons": {
+      "show_more": "Показать ещё",
+      "close": "Закрыть",
+      "download": "Скачать",
+      "home": "На главную"
+    },
+    "labels": {
+      "cities": "Города",
+      "list": "Список",
+      "map": "Карта",
+      "photos": "фото",
+      "language": "Язык",
+      "theme": "Тема",
+      "home": "На главную"
+    },
+    "theme": {
+      "light": "Светлая",
+      "dark": "Тёмная"
+    },
+    "language": {
+      "ru": "Рус",
+      "en": "Eng",
+      "tt": "Tat"
+    },
+    "placeholders": {
+      "search": "Поиск по статьям"
+    },
+    "errors": {
+      "not_found": "Страница не найдена"
+    }
+  },
+  "en": {
+    "site": {
+      "title": "Ruslan Fatikhov",
+      "description": "Personal site and portfolio"
+    },
+    "nav": {
+      "services": "Services",
+      "cities": "Cities",
+      "products": "Products",
+      "collections": "Collections",
+      "menu": "Menu",
+      "search": "Search"
+    },
+    "buttons": {
+      "show_more": "Show more",
+      "close": "Close",
+      "download": "Download",
+      "home": "Back home"
+    },
+    "labels": {
+      "cities": "Cities",
+      "list": "List",
+      "map": "Map",
+      "photos": "photos",
+      "language": "Language",
+      "theme": "Theme",
+      "home": "Back home"
+    },
+    "theme": {
+      "light": "Light",
+      "dark": "Dark"
+    },
+    "language": {
+      "ru": "Rus",
+      "en": "Eng",
+      "tt": "Tat"
+    },
+    "placeholders": {
+      "search": "Search articles"
+    },
+    "errors": {
+      "not_found": "Page not found"
+    }
+  },
+  "tt": {
+    "site": {
+      "title": "Ruslan Fatikhov",
+      "description": "Shakhsi sayt häm portfolio"
+    },
+    "nav": {
+      "services": "Servislar",
+      "cities": "Cities",
+      "products": "Products",
+      "collections": "Collections",
+      "menu": "Menu",
+      "search": "Ezlau"
+    },
+    "buttons": {
+      "show_more": "Tagyn kürsät",
+      "close": "Yabu",
+      "download": "Yökläp alu",
+      "home": "Öygä"
+    },
+    "labels": {
+      "cities": "Shähärlär",
+      "list": "İsemlek",
+      "map": "Karta",
+      "photos": "foto",
+      "language": "Tel",
+      "theme": "Tema",
+      "home": "Öygä"
+    },
+    "theme": {
+      "light": "Yaktı",
+      "dark": "Kara"
+    },
+    "language": {
+      "ru": "Rus",
+      "en": "Eng",
+      "tt": "Tat"
+    },
+    "placeholders": {
+      "search": "Mäqälälär buyınça ezläü"
+    },
+    "errors": {
+      "not_found": "Bit tabılmadı"
+    }
+  }
+}

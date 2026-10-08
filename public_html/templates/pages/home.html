@@ -1,0 +1,48 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<!--Cover-->
+<div class="cover">
+  <section>
+    <h1>Руслан Фатихов</h1>
+    <h2>Дизайнер цифровых продуктов</h2>
+  </section>
+
+  <img src="{{ asset_url('img/ruslan.jpg') }}" alt="Ruslan Fatikhov" loading="eager" fetchpriority="high" decoding="async" />
+</div>
+
+<div class="service">
+
+  <a href="/cv">
+    <img src="{{ asset_url('img/menu/cv.svg') }}" alt="cv" loading="eager" fetchpriority="high" decoding="async" />
+    <span>Резюме</span>
+  </a>
+
+  <a href="/books">
+    <img src="{{ asset_url('img/menu/book.svg') }}" alt="books" loading="eager" fetchpriority="high" decoding="async" />
+    <span>Книги</span>
+  </a>
+
+  <a href="/collections">
+    <img src="{{ asset_url('img/menu/collection.svg') }}" alt="collection" loading="eager" fetchpriority="high" decoding="async" />
+    <span>Коллекции</span>
+  </a>
+
+
+</div>
+
+<section class="feed">
+  <div class="feed__list" data-feed-list>
+    {% for post in feed %}
+      {% include "components/post-card.html" %}
+    {% endfor %}
+  </div>
+
+  <!--Show more-->
+  <button class="button" data-feed-more data-i18n="buttons.show_more">{{ t.buttons.show_more }}</button>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+  <script src="{{ asset_url('js/feed.js') }}" defer></script>
+{% endblock %}

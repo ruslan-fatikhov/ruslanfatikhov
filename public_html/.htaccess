@@ -1,0 +1,27 @@
+Options +ExecCGI -Indexes
+AddHandler wsgi-script .wsgi
+DirectoryIndex index.wsgi
+RewriteEngine On
+
+# This file is used by the production Apache host; Flask development uses no-cache.
+<IfModule mod_headers.c>
+  <If "%{REQUEST_URI} =~ m#^/static/(css|js|img|fonts)/# && %{QUERY_STRING} =~ m#(^|&)v=[^&]+#">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </If>
+  <ElseIf "%{REQUEST_URI} =~ m#^/static/#">
+    Header set Cache-Control "no-cache"
+  </ElseIf>
+</IfModule>
+
+RewriteCond %{THE_REQUEST} \s/+index\.wsgi[/?\s] [NC]
+RewriteRule ^index\.wsgi/?(.*)$ /$1 [R=301,L]
+
+# Only explicitly public assets may bypass Flask. No source/data/log directories.
+RewriteRule ^static/files/cv\.pdf$ /cv/download [R=308,L]
+RewriteRule ^static/(?:css|js|img|fonts)/[^.].*\.(?:css|js|jpg|jpeg|png|gif|webp|svg|ico|webmanifest|woff2?)$ - [L,NC]
+RewriteRule ^index\.wsgi$ - [L]
+RewriteRule ^(?:data|content|templates|venv|pydeps|__pycache__|tests)(?:/|$) - [F,L,NC]
+RewriteRule (^|/)\. - [F,L]
+RewriteRule ^(?:translations\.json|search\.json|robots\.txt|sitemap\.xml)$ index.wsgi [L,QSA]
+RewriteRule \.(?:py|pyc|md|log|json|txt|wsgi)$ - [F,L,NC]
+RewriteRule ^ index.wsgi [L,QSA]

@@ -1,0 +1,83 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<section class="admin-books">
+  <div class="admin-books__toolbar">
+    <a class="button" href="/admin/collections/{{ collection.id }}">Назад к коллекции</a>
+    <a class="button" href="/admin/collections/{{ collection.id }}/edit">Свойства коллекции</a>
+  </div>
+
+  {% if error %}
+    <p class="admin-books__alert admin-books__alert--error">{{ error }}</p>
+  {% endif %}
+
+  <form class="admin-form" method="post" enctype="multipart/form-data" data-item-form>
+    <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+    <input type="hidden" name="revision" value="{{ revision }}">
+    <input type="hidden" name="payload" data-item-payload>
+
+    <div class="admin-form__section">
+      <label class="admin-form__field">
+        <span>Название объекта</span>
+        <input type="text" data-item-title value="{{ item.title }}" required>
+      </label>
+
+      <label class="admin-form__field">
+        <span>Загрузить фото</span>
+        <input type="file" name="photos" accept="image/*" multiple>
+        <small>Можно выбрать несколько файлов сразу. Они добавятся к списку фото после сохранения.</small>
+      </label>
+    </div>
+
+    <div class="admin-form__section">
+      <div class="admin-form__header">
+        <div>
+          <h2>Дополнительные поля</h2>
+          <p>Все дополнительные поля в этой коллекции являются текстовыми.</p>
+        </div>
+      </div>
+
+      {% if collection['properties'] %}
+        <div class="admin-item-fields">
+          {% for prop in collection['properties'] %}
+            <label class="admin-form__field">
+              <span>{{ collection_property_label(prop, lang) }}</span>
+              <input type="text" data-item-value="{{ prop.key }}" value="{{ item['values'].get(prop.key, '') }}">
+            </label>
+          {% endfor %}
+        </div>
+      {% else %}
+        <p>Сначала добавьте свойства коллекции, затем можно будет заполнять значения у объектов.</p>
+      {% endif %}
+    </div>
+
+    <div class="admin-books__actions">
+      <button class="button" type="submit">
+        {% if form_mode == "edit" %}Сохранить объект{% else %}Создать объект{% endif %}
+      </button>
+    </div>
+  </form>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+(() => {
+  const form = document.querySelector('[data-item-form]');
+  const payloadInput = document.querySelector('[data-item-payload]');
+  const titleInput = document.querySelector('[data-item-title]');
+
+  form.addEventListener('submit', () => {
+    const values = {};
+    document.querySelectorAll('[data-item-value]').forEach((input) => {
+      values[input.getAttribute('data-item-value')] = input.value;
+    });
+
+    payloadInput.value = JSON.stringify({
+      title: titleInput.value,
+      values,
+    });
+  });
+})();
+</script>
+{% endblock %}
